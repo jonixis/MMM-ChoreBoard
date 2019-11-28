@@ -13,7 +13,7 @@ Module.register('MMM-ChoreBoard', {
 
   getCommands: function(commander) {
     commander.add({
-      command: 'ämtli',
+      command: 'aemtli',
       callback: 'command_choreDone'
     });
   },
