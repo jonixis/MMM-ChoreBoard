@@ -63,8 +63,8 @@ module.exports = NodeHelper.create({
       this.choreSchedule = JSON.parse(data);
 
       if (
-        moment(this.config.nextDueDate).isAfter(
-          moment(this.choreSchedule.nextDueDate)
+        moment(this.config.nextDueDate, "DD.MM.YY").isAfter(
+          moment(this.choreSchedule.nextDueDate, "DD.MM.YY")
         )
       ) {
         this.createChoreSchedule();
@@ -77,7 +77,7 @@ module.exports = NodeHelper.create({
 
   updateChoreSchedule: function() {
     const today = moment().startOf("day");
-    if (today.isSame(moment(this.choreSchedule.nextDueDate).add(1, "days"))) {
+    if (today.isSame(moment(this.choreSchedule.nextDueDate, "DD.MM.YY").add(1, "days"))) {
       this.choreSchedule.schedule.forEach(element => {
         let choreIndex = this.config.chores.indexOf(element.chores.slice(-1));
         let newChoreIndex =
@@ -89,7 +89,7 @@ module.exports = NodeHelper.create({
         element.chores.push(this.config.chores(newChoreIndex));
       });
 
-      this.choreSchedule.nextDueDate = moment(this.choreSchedule.nextDueDate)
+      this.choreSchedule.nextDueDate = moment(this.choreSchedule.nextDueDate, "DD.MM.YY")
         .add(2, "weeks")
         .format("DD.MM.YY");
       this.saveChoreSchedule();
