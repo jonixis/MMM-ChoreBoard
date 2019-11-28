@@ -3,7 +3,11 @@
     font-size: 21px
 }
 
-MMM-ChoreBoard .chore-done {
+.MMM-ChoreBoard .chore-done {
+    color: #80bc4f;
+}
+
+.MMM-ChoreBoard .chore-done-cell {
     text-decoration: line-through;
 }
 

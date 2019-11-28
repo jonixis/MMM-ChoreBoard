@@ -79,7 +79,8 @@ Module.register('MMM-ChoreBoard', {
       }
 
       if (element.done) {
-        choreCell.classList.add('chore-done');
+        personCell.classList.add('chore-done');
+        choreCell.classList.add('chore-done-cell');
       }
 
       tableRow.appendChild(personCell);
