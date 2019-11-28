@@ -18,7 +18,7 @@ module.exports = NodeHelper.create({
       this.getChoreSchedule();
     }
     else if (notification === "CHORE_DONE") {
-      this.setChoreDone(payload);
+      this.toggleChoreDone(payload);
     }
   },
 
@@ -108,14 +108,14 @@ module.exports = NodeHelper.create({
     );
   },
 
-  setChoreDone: function(person) {
+  toggleChoreDone: function(person) {
     for (let i = 0; i < this.choreSchedule.schedule.length; ++i) {
       if (this.choreSchedule.schedule[i].person.toLowerCase() !== person.toLowerCase()) {
         continue;
       }
 
       if (this.choreSchedule.schedule[i].chores.length <= 1) {
-        this.choreSchedule.schedule[i].done = true;
+        this.choreSchedule.schedule[i].done = !this.choreSchedule.schedule[i].done;
       } else {
         this.choreSchedule.schedule[i].chores.shift();
       }
