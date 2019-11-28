@@ -78,6 +78,10 @@ Module.register('MMM-ChoreBoard', {
         choreCell.innerHTML += i > 0 ? ', ' + element.chores[i] : element.chores[i];
       }
 
+      if (element.done) {
+        choreCell.classList.add('chore-done');
+      }
+
       tableRow.appendChild(personCell);
       tableRow.appendChild(choreCell);
       choreTable.appendChild(tableRow);
@@ -91,7 +95,7 @@ Module.register('MMM-ChoreBoard', {
     dateCell.classList.add('bold');
     dateCell.classList.add('bright');
 
-    textCell.innerHTML += '🧹';
+    textCell.innerHTML += '';
     textCell.classList.add('bright');
 
     dateRow.classList.add('due-date-row');

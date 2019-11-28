@@ -3,6 +3,10 @@
     font-size: 21px
 }
 
+MMM-ChoreBoard .chore-done {
+    text-decoration: line-through;
+}
+
 .MMM-ChoreBoard .chore-table {
     border-collapse: collapse;
 }
