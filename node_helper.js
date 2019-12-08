@@ -77,25 +77,29 @@ module.exports = NodeHelper.create({
 
   updateChoreSchedule: function() {
     const today = moment().startOf("day");
-    if (today.isSame(moment(this.choreSchedule.nextDueDate, "DD.MM.YY").add(1, "days"))) {
-      this.choreSchedule.schedule.forEach(element => {
-        let choreIndex = this.config.chores.indexOf(element.chores.slice(-1));
-        let newChoreIndex =
-          choreIndex + 1 !== this.config.chores.length ? choreIndex + 1 : 0;
-
-        if (element.done) {
-          element.chores = [];
-        }
-        element.chores.push(this.config.chores(newChoreIndex));
-      });
-
-      this.choreSchedule.nextDueDate = moment(this.choreSchedule.nextDueDate, "DD.MM.YY")
-        .add(2, "weeks")
-        .format("DD.MM.YY");
-      this.saveChoreSchedule();
+    const currentHour = moment().hour();
+    if (!today.hour(currentHour).isSame(moment(this.choreSchedule.nextDueDate, "DD.MM.YY").add(1, "days").hour(0), 'hour')) {
+      return;
     }
 
+    this.choreSchedule.schedule.forEach(item => {
+      let choreIndex = this.config.chores.indexOf(item.chores.slice(-1)[0]);
+      let newChoreIndex =
+          choreIndex + 1 !== this.config.chores.length ? choreIndex + 1 : 0;
+
+      if (item.done) {
+        item.chores = [];
+        item.done = false;
+      }
+      item.chores.push(this.config.chores[newChoreIndex]);
+    });
+
+    this.choreSchedule.nextDueDate = moment(this.choreSchedule.nextDueDate, "DD.MM.YY")
+      .add(2, "weeks")
+      .format("DD.MM.YY");
+    this.saveChoreSchedule();
     this.sendSocketNotification("CHORESCHEDULE", this.choreSchedule);
+
   },
 
   saveChoreSchedule: function() {

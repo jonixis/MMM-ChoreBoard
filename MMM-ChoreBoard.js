@@ -103,7 +103,7 @@ Module.register('MMM-ChoreBoard', {
       this.sendTelegramReminder('*Deadline morn*');
     }
 
-    if (today.hour(currentHour).isSame(today.hour(8), 'hour')) {
+    if (today.hour(currentHour).isSame(moment().startOf('day').hour(12), 'hour')) {
       for (const item of this.choreSchedule.schedule) {
         if (item.chores.length > 1) {
           this.sendTelegramReminder('‼️ Überfälligi ämtli gfunde.\n\nBi meh als eim ämtli ih dinere liste, isch das ganz links snächste wo muss abhäglet werde.');
