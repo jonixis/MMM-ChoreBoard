@@ -76,9 +76,9 @@ Module.register('MMM-ChoreBoard', {
 
     for (const item of this.choreSchedule.schedule) {
       if (item.chores.length > 1) {
-        message += '‼️';
+        message += '‼️ ';
       } else {
-        message += item.done ? '✅' : '⏺';
+        message += item.done ? '✅ ' : '⏺ ';
       }
 
       message += '*' + item.person + '* -> ';
