@@ -147,6 +147,8 @@ Module.register('MMM-ChoreBoard', {
       if (item.done) {
         personCell.classList.add('chore-done');
         choreCell.classList.add('chore-done-cell');
+      } else if (item.chores.length > 1) {
+        personCell.classList.add('chore-overdue');
       }
 
       tableRow.appendChild(personCell);
