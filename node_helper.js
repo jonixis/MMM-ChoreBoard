@@ -63,7 +63,7 @@ module.exports = NodeHelper.create({
       this.choreSchedule = JSON.parse(data);
 
       if (
-        moment(this.config.nextDueDate, "DD.MM.YY").isAfter(
+        moment(this.config.nextDueDate, "DD.MM.YY").isSameOrAfter(
           moment(this.choreSchedule.nextDueDate, "DD.MM.YY")
         )
       ) {
