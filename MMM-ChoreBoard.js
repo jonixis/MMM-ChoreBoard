@@ -97,16 +97,16 @@ Module.register('MMM-ChoreBoard', {
     const currentHour = moment().hour();
     const dueDate = moment(this.choreSchedule.nextDueDate, 'DD.MM.YY');
 
+    // Send reminder on same day
     if (today.hour(currentHour).isSame(dueDate.hour(12), 'hour')) {
       this.sendTelegramReminder('‼️*Deadline hüt*‼️');
-    } else if (today.hour(currentHour).isSame(dueDate.subtract(2, 'days').hour(12), 'hour')) {
-      this.sendTelegramReminder('*Deadline übermorn*');
-    }
+    } 
 
+    // Send reminder every three days
     if (today.hour(currentHour).isSame(moment().startOf('day').hour(12), 'hour')) {
       for (const item of this.choreSchedule.schedule) {
-        if (item.chores.length > 1 && today.diff(dueDate, 'days') % 2 === 0) {
-          this.sendTelegramReminder('‼️ Überfälligi ämtli gfunde.\n\nBi meh als eim ämtli ih dinere liste, isch das ganz links snächste wo muss abhäglet werde.');
+        if (item.chores.length > 1 && today.diff(dueDate, 'days') % 3 === 0) {
+          this.sendTelegramReminder('Überfälligi ämtli gfunde.\n\nBi meh als eim ämtli ih dinere liste, isch das ganz links snächste wo muss abhäglet werde.');
           break;
         }
       }
